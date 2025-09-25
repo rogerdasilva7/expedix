@@ -4,11 +4,21 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { RxPencil1 } from "react-icons/rx";
 import { FaLocationArrow } from "react-icons/fa6";
 import { ModalForm } from "../../components/ModalForm";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
 export function Home(){
+const [openModal, setOpenModal] = useState(false);
+
+function changeModal(){
+    setOpenModal(true)
+}
     return(
         <div>
-            <ModalForm/>
+            <AnimatePresence>
+                {openModal && (<ModalForm onClose={() => setOpenModal(false)}/>)}
+            </AnimatePresence>
+
             <main className="flex flex-col ml-8 mr-8">
                 <section className="relative flex justify-between">
                     <input type="text" placeholder="Pesquisar registros" className="border border-solid border-gray-100/20 text-gray-100 text-sm p-3.5 rounded-3xl bg-[#020817] w-100 pl-17 focus:border-green-100/40 outline-none"/>
@@ -25,7 +35,7 @@ export function Home(){
                         <p className="text-white text-3xl">Adicionar Novo Registro</p>
                         <p className="text-gray-100/60 mt-2.5">Adicione um novo registro para controlar sua expedição.</p>
                     </div>
-                    <button className="bg-[#6f5af5d7] duration-500 ease-in-out cursor-pointer p-2 rounded-full mr-7.5 border border-solid border-gray-100/20 text-white hover:bg-[#6F5AF5] hover:brightness-125">
+                    <button className="bg-[#6f5af5d7] duration-500 ease-in-out cursor-pointer p-2 rounded-full mr-7.5 border border-solid border-gray-100/20 text-white hover:bg-[#6F5AF5] hover:brightness-125" onClick={() => changeModal()}>
                         <IoAdd className="text-4xl"/>
                     </button>
                 </section>
