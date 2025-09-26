@@ -6,9 +6,46 @@ import { FaLocationArrow } from "react-icons/fa6";
 import { ModalForm } from "../../components/ModalForm";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import { onSnapshot, collection } from "firebase/firestore";
+import { db } from "../../services/firebaseConnection";
+
+interface DataProps {
+  name: string;
+  id: string;
+  telephone: string;
+  city: string;
+  date: string;
+  time: string;
+  dispatcher: string;
+  observations: string;
+}
 
 export function Home(){
 const [openModal, setOpenModal] = useState(false);
+const [records, setRecords] = useState<DataProps[]>([]);
+
+useEffect(() => {
+    async function loadReacords(){
+        const unsub = onSnapshot(collection(db, "records"),(snapshot) => {
+            let listRecords: DataProps[] = [];
+            snapshot.forEach((doc) => {
+                listRecords.push({
+                    id: doc.id,
+                    city: doc.data().city,
+                    date: doc.data().date,
+                    dispatcher: doc.data().dispatcher,
+                    name: doc.data().name,
+                    telephone: doc.data().telephone,
+                    time: doc.data().time,
+                    observations: doc.data().observations,
+                })
+            })
+            setRecords(listRecords)
+        })
+    }
+    loadReacords()
+},[])
 
 function changeModal(){
     setOpenModal(true)
@@ -42,7 +79,7 @@ function changeModal(){
                 <section className="mt-5 border border-solid border-gray-100/20 w-full rounded-lg bg-[#020817]">
                     <div className="ml-7.5 mt-5 mb-5">
                         <p className="text-white text-3xl">Resumo de expedição</p>
-                        <p className="text-gray-100/60 mt-2.5">Atualmente você possui 1 registro na sua tabela.</p>
+                        <p className="text-gray-100/60 mt-2.5">Atualmente você possui {records.length} registros na sua tabela.</p>
                     </div>
                         <table className="w-full">
                             <thead className="">
@@ -56,20 +93,25 @@ function changeModal(){
                                     <th className="border-b border-gray-100/20 text-left pt-3.5 pb-3.5 pl-7.5">Ações</th>
                                 </tr>
                             </thead>
+                            
                             <tbody className="text-gray-100 w-full text-sm">
-                                <tr className="">
-                                    <td className="p-7.5">João</td>
-                                    <td className="p-7.5">5400000-00000</td>
-                                    <td className="p-7.5">Erechim</td>
-                                    <td className="p-7.5">20/05/2025</td>
-                                    <td className="p-7.5">15:30</td>
-                                    <td className="p-7.5">Roger</td>
+                            {records.map((register) => (
+                                <tr className="border-b border-gray-100/20 text-left pt-3.5 pb-3.5 pl-7.5">
+                                    <td className="p-7.5">{register.name}</td>
+                                    <td className="p-7.5">{register.telephone}</td>
+                                    <td className="p-7.5">{register.city}</td>
+                                    <td className="p-7.5">{register.date}</td>
+                                    <td className="p-7.5">{register.time}</td>
+                                    <td className="p-7.5">{register.dispatcher}</td>
                                     <td className="flex gap-6 items-center p-7.5">
                                         <button className="cursor-pointer"><RxPencil1/></button>
                                         <button className="cursor-pointer"><FaRegTrashAlt/></button>
                                     </td>
+                                   
                                 </tr>
+                             ))}
                             </tbody>
+
                         </table>
                 </section>
             </main>

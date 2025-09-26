@@ -17,7 +17,6 @@ const [dispatcher, setDispatcher] = useState("");
 const [observations, setObservations] = useState("");
 
 
-
 function onCloseModal(){
   onClose(true)
 }
