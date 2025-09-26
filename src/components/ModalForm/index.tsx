@@ -1,14 +1,47 @@
 import { IoClose } from "react-icons/io5";
 import { motion } from "framer-motion";
-
+import { db } from "../../services/firebaseConnection";
+import { collection, addDoc } from "firebase/firestore";
+import { useState } from "react";
 interface ChangeModal {
   onClose: (changed: boolean) => void;
 }
 
 export function ModalForm({ onClose }: ChangeModal) {
-    function onCloseModal(){
-      onClose(true)
-    }
+const [name, setname] = useState("");
+const [telephone, setTelephone] = useState("");
+const [city, setCity] = useState("");
+const [date, setDate] = useState("");
+const [time, setTime] = useState("");
+const [dispatcher, setDispatcher] = useState("");
+const [observations, setObservations] = useState("");
+
+
+
+function onCloseModal(){
+  onClose(true)
+}
+
+async function saveData(){
+  onClose(true)
+
+  await addDoc(collection(db, "records"),{
+    name: name,
+    telephone: telephone,
+    city: city,
+    date: date,
+    time: time, 
+    dispatcher: dispatcher,
+    observations: observations
+  })
+  .then(() => {
+    alert("dados cadastrados")
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
 
   return (
     <>
@@ -43,23 +76,29 @@ export function ModalForm({ onClose }: ChangeModal) {
             Preencha os campos para criar um novo registro de expedição.
           </p>
 
-          <form className="flex flex-col">
+          <div className="flex flex-col">
             <div className="flex justify-between gap-4">
               <div className="flex flex-col w-full">
                 <label className="text-white">Nome</label>
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
+                  value={name}
+                  onChange={(e) => setname(e.target.value)}
                 />
                 <label className="text-white">Cidade</label>
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                 />
                 <label className="text-white">Hora Retirada</label>
                 <input
                   type="time"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
                 />
               </div>
               <div className="flex flex-col w-full">
@@ -67,16 +106,22 @@ export function ModalForm({ onClose }: ChangeModal) {
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
+                  value={telephone}
+                  onChange={(e) => setTelephone(e.target.value)}
                 />
                 <label className="text-white">Data Retirada</label>
                 <input
                   type="date"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                 />
                 <label className="text-white">Expedidor</label>
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
+                  value={dispatcher}
+                  onChange={(e) => setDispatcher(e.target.value)}
                 />
               </div>
             </div>
@@ -86,13 +131,15 @@ export function ModalForm({ onClose }: ChangeModal) {
               <textarea
                 rows={5}
                 className="border border-gray-100/20 rounded-lg focus:border-green-100/40 outline-none text-white p-3.5"
+                value={observations}
+                onChange={(e) => setObservations(e.target.value)}
               ></textarea>
             </div>
 
-            <button className="text-[#000] bg-[#6f5af5d7] mt-4 p-2 rounded-lg cursor-pointer hover:bg-[#6F5AF5] hover:brightness-125 duration-500">
+            <button className="text-[#000] bg-[#6f5af5d7] mt-4 p-2 rounded-lg cursor-pointer hover:bg-[#6F5AF5] hover:brightness-125 duration-500" onClick={saveData}>
               Criar registro
             </button>
-          </form>
+          </div>
         </div>
       </motion.div>
     </>
