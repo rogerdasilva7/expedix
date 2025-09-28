@@ -46,7 +46,7 @@ useEffect(() => {
     }
     loadReacords()
 },[])
-
+                            
 function changeModal(){
     setOpenModal(true)
 }
@@ -59,9 +59,6 @@ function changeModal(){
             <main className="flex flex-col ml-8 mr-8">
                 <section className="relative flex justify-between">
                     <input type="text" placeholder="Pesquisar registros" className="border border-solid border-gray-100/20 text-gray-100 text-sm p-3.5 rounded-3xl bg-[#020817] w-100 pl-17 focus:border-green-100/40 outline-none"/>
-                        <div className="inline-flex items-center justify-center p-5.5 border border-gray-100/20 rounded-full ml-4 absolute mt-1 left-100 bg-[#6f5af5d7] duration-500 ease-in-out cursor-pointer text-white hover:bg-[#6F5AF5] hover:brightness-125">
-                            <IoMdSearch className="text-3xl absolute top-2 left-2"/>
-                        </div>
                         <FaLocationArrow className="text-[#6F5AF5] absolute text-2xl top-3.5 left-5"/>
                     <div>
                         <p className="text-white">Roger Anacleto</p>
@@ -96,7 +93,7 @@ function changeModal(){
                             
                             <tbody className="text-gray-100 w-full text-sm">
                             {records.map((register) => (
-                                <tr className="border-b border-gray-100/20 text-left pt-3.5 pb-3.5 pl-7.5">
+                                <tr className="border-b rounded-lg border-gray-100/20 text-left pt-3.5 pb-3.5 pl-7.5">
                                     <td className="p-7.5">{register.name}</td>
                                     <td className="p-7.5">{register.telephone}</td>
                                     <td className="p-7.5">{register.city}</td>
