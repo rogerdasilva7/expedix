@@ -34,7 +34,7 @@ async function newUser(){
     return(
         <div>
             <main>
-                <section className="w-screen flex flex-col items-center justify-center h-screen bg-[#00030C]">
+                <section className="w-screen flex flex-col items-center justify-center h-screen bg-[#020817]">
                     <div className="flex flex-col items-center mb-10">
                         <h1 className="text-white font-bold text-3xl mb-3.5">Criar Conta</h1>
                         <p className="text-gray-400 tracking-wide font-medium">Cadastre-se para começar</p>
