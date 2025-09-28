@@ -1,4 +1,3 @@
-import { IoMdSearch } from "react-icons/io";
 import { IoAdd } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { RxPencil1 } from "react-icons/rx";
@@ -24,6 +23,7 @@ interface DataProps {
 export function Home(){
 const [openModal, setOpenModal] = useState(false);
 const [records, setRecords] = useState<DataProps[]>([]);
+const [search, setSearch] = useState("");
 
 useEffect(() => {
     async function loadReacords(){
@@ -46,6 +46,12 @@ useEffect(() => {
     }
     loadReacords()
 },[])
+
+const filteredRecords = records.filter((item) => {
+    const fullText = Object.values(item).join(" ").toLowerCase();
+    const normalizedSearch = search.toLowerCase();
+    return fullText.includes(normalizedSearch);
+});
                             
 function changeModal(){
     setOpenModal(true)
@@ -58,7 +64,7 @@ function changeModal(){
 
             <main className="flex flex-col ml-8 mr-8">
                 <section className="relative flex justify-between">
-                    <input type="text" placeholder="Pesquisar registros" className="border border-solid border-gray-100/20 text-gray-100 text-sm p-3.5 rounded-3xl bg-[#020817] w-100 pl-17 focus:border-green-100/40 outline-none"/>
+                    <input type="text" placeholder="Pesquisar registros" className="border border-solid border-gray-100/20 text-gray-100 text-sm p-3.5 rounded-3xl bg-[#020817] w-100 pl-17 focus:border-green-100/40 outline-none" value={search} onChange={(e) => setSearch(e.target.value)}/>
                         <FaLocationArrow className="text-[#6F5AF5] absolute text-2xl top-3.5 left-5"/>
                     <div>
                         <p className="text-white">Roger Anacleto</p>
@@ -92,7 +98,7 @@ function changeModal(){
                             </thead>
                             
                             <tbody className="text-gray-100 w-full text-sm">
-                            {records.map((register) => (
+                            {filteredRecords.map((register) => (
                                 <tr className="border-b rounded-lg border-gray-100/20 text-left pt-3.5 pb-3.5 pl-7.5">
                                     <td className="p-7.5">{register.name}</td>
                                     <td className="p-7.5">{register.telephone}</td>
