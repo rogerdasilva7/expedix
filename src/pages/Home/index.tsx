@@ -8,7 +8,8 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { onSnapshot, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConnection";
-
+import { deleteDoc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 interface DataProps {
   name: string;
   id: string;
@@ -56,6 +57,17 @@ const filteredRecords = records.filter((item) => {
 function changeModal(){
     setOpenModal(true)
 }
+
+async function deleteRecord(id: string){
+    const docRef = doc(db, "records", id)
+    await deleteDoc(docRef)
+    .then(() => {
+        alert("deletado com sucesso")
+    })
+    .catch((error) => {
+        alert(error)
+    })
+}
     return(
         <div>
             <AnimatePresence>
@@ -81,7 +93,7 @@ function changeModal(){
                 </section>
                 <section className="mt-5 border border-solid border-gray-100/20 w-full rounded-lg bg-[#020817]">
                     <div className="ml-7.5 mt-5 mb-5">
-                        <p className="text-white text-3xl">Resumo de expedição</p>
+                        <p className="text-white text-3xl">Resumo de Expedição</p>
                         <p className="text-gray-100/60 mt-2.5">Atualmente você possui {records.length} registros na sua tabela.</p>
                     </div>
                         <table className="w-full">
@@ -108,7 +120,7 @@ function changeModal(){
                                     <td className="p-7.5">{register.dispatcher}</td>
                                     <td className="flex gap-6 items-center p-7.5">
                                         <button className="cursor-pointer"><RxPencil1/></button>
-                                        <button className="cursor-pointer"><FaRegTrashAlt/></button>
+                                        <button className="cursor-pointer" onClick={() => deleteRecord(register.id)}><FaRegTrashAlt/></button>
                                     </td>
                                    
                                 </tr>
