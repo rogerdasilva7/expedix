@@ -5,19 +5,25 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useContext, useEffect, useState } from "react";
 import { auth } from "../../services/firebaseConnection";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export function Login(){
+const { login } = useContext(AuthContext);
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
-const [login, setLogin] = useState(false)
 const navigate = useNavigate();
-
+const [userLoginDetail, setUserLoginDetail] = useState({});
 
 async function loginUser(){
 await signInWithEmailAndPassword(auth, email, password)
 .then((value) => {
     alert("logado com sucesso");
     navigate("/");
+    setUserLoginDetail({
+        uid: value.user.uid,
+        email: value.user.email,
+    })
+    login(userLoginDetail)
 
 })
 .catch(() => {
@@ -31,11 +37,11 @@ useEffect(() => {
             if(user){
                 //tem usuario logado
             }
-            setLogin(false)
         })
     }
     checkLogin()
 },[])
+
     return(
         <div>
             <main>

@@ -10,16 +10,15 @@ import { useNavigate } from "react-router";
 export function Signup(){
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+
 const [user, setUser] = useState("");
+
 const navigate = useNavigate();
 
 async function newUser(){
     await createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
-        setUser("");
-        setEmail("");
-        setPassword("");
-
+        
         navigate("/login")
 
     })
