@@ -78,21 +78,21 @@ async function saveData(){
           <div className="flex flex-col">
             <div className="flex justify-between gap-4">
               <div className="flex flex-col w-full">
-                <label className="text-white">Nome</label>
+                <label className="text-white pb-2">Nome</label>
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
                 />
-                <label className="text-white">Cidade</label>
+                <label className="text-white pb-2">Cidade</label>
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 />
-                <label className="text-white">Hora Retirada</label>
+                <label className="text-white pb-2">Hora Retirada</label>
                 <input
                   type="time"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
@@ -101,21 +101,21 @@ async function saveData(){
                 />
               </div>
               <div className="flex flex-col w-full">
-                <label className="text-white">Telefone</label>
+                <label className="text-white pb-2">Telefone</label>
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={telephone}
                   onChange={(e) => setTelephone(e.target.value)}
                 />
-                <label className="text-white">Data Retirada</label>
+                <label className="text-white pb-2">Data Retirada</label>
                 <input
                   type="date"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                 />
-                <label className="text-white">Expedidor</label>
+                <label className="text-white pb-2">Expedidor</label>
                 <input
                   type="text"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
@@ -126,7 +126,7 @@ async function saveData(){
             </div>
 
             <div className="flex flex-col">
-              <label className="text-white">Observações</label>
+              <label className="text-white pb-2">Observações</label>
               <textarea
                 rows={5}
                 className="border border-gray-100/20 rounded-lg focus:border-green-100/40 outline-none text-white p-3.5"
