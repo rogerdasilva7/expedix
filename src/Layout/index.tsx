@@ -4,6 +4,7 @@ import { useContext } from "react"
 import { AuthContext } from "../contexts/AuthContext"
 import { Login } from "../pages/Login";
 export function Layout(){
+    
 const { userLoginAuth } = useContext(AuthContext);
 
     return(
@@ -17,7 +18,6 @@ const { userLoginAuth } = useContext(AuthContext);
             </div>   
             )}
             {userLoginAuth === false && (<Login/>)}
-
         </>
     )
 }

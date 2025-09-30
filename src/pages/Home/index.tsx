@@ -10,7 +10,10 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConnection";
 import { deleteDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
-interface DataProps {
+import { ModalUpdate } from "../../components/ModalUpdate";
+import { useContext } from "react";
+import { UpdateContext } from "../../contexts/UpdateContext";
+export interface DataProps {
   name: string;
   id: string;
   telephone: string;
@@ -22,7 +25,9 @@ interface DataProps {
 }
 
 export function Home(){
+const { changeUpdateModal } = useContext(UpdateContext)
 const [openModal, setOpenModal] = useState(false);
+const [openModalUpdate, setOpenModalUpdate] = useState(false)
 const [records, setRecords] = useState<DataProps[]>([]);
 const [search, setSearch] = useState("");
 
@@ -53,6 +58,8 @@ const filteredRecords = records.filter((item) => {
     const normalizedSearch = search.toLowerCase();
     return fullText.includes(normalizedSearch);
 });
+
+console.log(typeof filteredRecords)
                             
 function changeModal(){
     setOpenModal(true)
@@ -68,10 +75,19 @@ async function deleteRecord(id: string){
         alert(error)
     })
 }
+
+function openUpdateModal(register: DataProps){
+    changeUpdateModal(register)
+    setOpenModalUpdate(true)
+}
+
     return(
         <div>
             <AnimatePresence>
                 {openModal && (<ModalForm onClose={() => setOpenModal(false)}/>)}
+            </AnimatePresence>
+            <AnimatePresence>
+                {openModalUpdate && (<ModalUpdate onCloseModal={() => setOpenModalUpdate(false)}/>)}
             </AnimatePresence>
 
             <main className="flex flex-col ml-8 mr-8">
@@ -119,7 +135,7 @@ async function deleteRecord(id: string){
                                     <td className="p-7.5">{register.time}</td>
                                     <td className="p-7.5">{register.dispatcher}</td>
                                     <td className="flex gap-6 items-center p-7.5">
-                                        <button className="cursor-pointer"><RxPencil1/></button>
+                                        <button className="cursor-pointer" onClick={() => openUpdateModal(register)}><RxPencil1/></button>
                                         <button className="cursor-pointer" onClick={() => deleteRecord(register.id)}><FaRegTrashAlt/></button>
                                     </td>
                                    
