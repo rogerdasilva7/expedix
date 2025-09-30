@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { db } from "../../services/firebaseConnection";
 import { collection, addDoc } from "firebase/firestore";
 import { useState } from "react";
+import toast from "react-hot-toast";
 interface ChangeModal {
   onClose: (changed: boolean) => void;
 }
@@ -34,7 +35,12 @@ async function saveData(){
     observations: observations
   })
   .then(() => {
-    alert("dados cadastrados")
+    toast.success(
+    <div>
+        <h2 className="text-white font-bold text-sm">Registro Criado</h2>
+        <p className="text-gray-100/60 text-sm">O registro foi criado com sucesso.</p>
+    </div>
+    )
   })
   .catch((error) => {
     console.log(error)

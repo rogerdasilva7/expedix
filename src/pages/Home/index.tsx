@@ -13,6 +13,7 @@ import { doc } from "firebase/firestore";
 import { ModalUpdate } from "../../components/ModalUpdate";
 import { useContext } from "react";
 import { UpdateContext } from "../../contexts/UpdateContext";
+import toast from "react-hot-toast";
 export interface DataProps {
   name: string;
   id: string;
@@ -58,8 +59,6 @@ const filteredRecords = records.filter((item) => {
     const normalizedSearch = search.toLowerCase();
     return fullText.includes(normalizedSearch);
 });
-
-console.log(typeof filteredRecords)
                             
 function changeModal(){
     setOpenModal(true)
@@ -69,7 +68,12 @@ async function deleteRecord(id: string){
     const docRef = doc(db, "records", id)
     await deleteDoc(docRef)
     .then(() => {
-        alert("deletado com sucesso")
+        toast.success(
+            <div>
+                <h2 className="text-white font-bold text-sm">Registro Deletado</h2>
+                <p className="text-gray-100/60 text-sm">O registro foi deletado com sucesso.</p>
+            </div>
+        )
     })
     .catch((error) => {
         alert(error)

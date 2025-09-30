@@ -6,6 +6,7 @@ import { auth } from "../../services/firebaseConnection";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 export function Signup(){
 const [email, setEmail] = useState("");
@@ -18,7 +19,12 @@ const navigate = useNavigate();
 async function newUser(){
     await createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
-        
+        toast.success(
+            <div>
+                <h2 className="text-white font-bold text-sm">Conta Criada</h2>
+                <p className="text-gray-100/60 text-sm">A conta foi criada com sucesso.</p>
+            </div>
+        )
         navigate("/login")
 
     })

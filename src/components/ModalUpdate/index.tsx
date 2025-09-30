@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { UpdateContext } from "../../contexts/UpdateContext";
 import type { DataProps } from "../../pages/Home";
+import toast from "react-hot-toast";
 
 interface ChangeModalUpdate {
   onCloseModal: (changed: boolean) => void;
@@ -43,7 +44,12 @@ async function saveData(id: DataProps | null){
     observations: observations
   })
   .then(() => {
-    alert("o registro foi atualizado!!")
+    toast.success(
+        <div>
+          <h2 className="text-white font-bold text-sm">Registro Atualizado</h2>
+          <p className="text-gray-100/60 text-sm">O registro foi atualizado com sucesso.</p>
+        </div>
+    );
   })
   .catch((error) => {
     alert(error)

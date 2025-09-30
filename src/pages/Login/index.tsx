@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { auth } from "../../services/firebaseConnection";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 export function Login(){
 const { login } = useContext(AuthContext);
@@ -17,7 +18,12 @@ const [userLoginDetail, setUserLoginDetail] = useState({});
 async function loginUser(){
 await signInWithEmailAndPassword(auth, email, password)
 .then((value) => {
-    alert("logado com sucesso");
+    toast.success(
+    <div>
+        <h2 className="text-white font-bold text-sm">Login Efetuado</h2>
+        <p className="text-gray-100/60 text-sm">O login foi efetuado com sucesso.</p>
+    </div>
+    )
     navigate("/");
     setUserLoginDetail({
         uid: value.user.uid,
@@ -27,7 +33,12 @@ await signInWithEmailAndPassword(auth, email, password)
 
 })
 .catch(() => {
-    alert("erro ao fazer login")
+    toast.error(
+    <div>
+        <h2 className="text-white font-bold text-sm">Erro no Login</h2>
+        <p className="text-gray-100/60 text-sm">Ocorreu um erro nas credenciais ao tentar fazer login.</p>
+    </div>
+    )
 })
 }
 
