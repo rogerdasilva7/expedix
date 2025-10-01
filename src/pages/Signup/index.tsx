@@ -7,34 +7,42 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
 
 export function Signup(){
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
-
-const [user, setUser] = useState("");
+const [userName, setUserName] = useState("");
 
 const navigate = useNavigate();
 
-async function newUser(){
-    await createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-        toast.success(
-            <div>
-                <h2 className="text-white font-bold text-sm">Conta Criada</h2>
-                <p className="text-gray-100/60 text-sm">A conta foi criada com sucesso.</p>
-            </div>
-        )
-        navigate("/login")
+async function newUser() {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    
+    await updateProfile(user, {
+      displayName: userName,
+    });
 
-    })
-    .catch((error) => {
-        if(error.code === "auth/weak-password"){
-            alert("senha fraca!!")
-        }else if(error.code === "auth/email-already-in-use"){
-            alert("email já existe!!")
-        }
-    })
+    toast.success(
+      <div>
+        <h2 className="text-white font-bold text-sm">Conta Criada</h2>
+        <p className="text-gray-100/60 text-sm">A conta foi criada com sucesso.</p>
+      </div>
+    );
+
+    navigate("/login");
+
+  } catch (error: any) {
+    if (error.code === "auth/weak-password") {
+      alert("senha fraca!!")
+    } else if (error.code === "auth/email-already-in-use") {
+      alert("email já existe!!")
+    } else {
+      console.log("Erro inesperado:", error);
+    }
+  }
 }
     return(
         <div>
@@ -48,7 +56,7 @@ async function newUser(){
                         <div className="flex flex-col mb-5.5 relative">
                             <label className="text-white font-bold mb-2.5">Nome de usuário</label>
                             <MdOutlineEmail className="absolute text-2xl text-gray-400 top-10.5 left-3"/>
-                            <input type="text" placeholder="nome@exemplo.com" className="text-gray-400 border-1 border-solid border-gray-100/20 rounded-md pt-2 pb-2 pl-12" value={user} onChange={(e) => setUser(e.target.value)}/>
+                            <input type="text" placeholder="nome@exemplo.com" className="text-gray-400 border-1 border-solid border-gray-100/20 rounded-md pt-2 pb-2 pl-12" value={userName} onChange={(e) => setUserName(e.target.value)}/>
                         </div>
                         <div className="flex flex-col mb-5.5 relative">
                             <label className="text-white font-bold mb-2.5">Email</label>

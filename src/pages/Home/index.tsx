@@ -14,6 +14,9 @@ import { ModalUpdate } from "../../components/ModalUpdate";
 import { useContext } from "react";
 import { UpdateContext } from "../../contexts/UpdateContext";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contexts/AuthContext";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../services/firebaseConnection";
 export interface DataProps {
   name: string;
   id: string;
@@ -26,6 +29,7 @@ export interface DataProps {
 }
 
 export function Home(){
+const { userName, getUserName } = useContext(AuthContext);
 const { changeUpdateModal } = useContext(UpdateContext)
 const [openModal, setOpenModal] = useState(false);
 const [openModalUpdate, setOpenModalUpdate] = useState(false)
@@ -53,6 +57,20 @@ useEffect(() => {
     }
     loadReacords()
 },[])
+
+useEffect(() => {
+    async function checkLogin(){
+        onAuthStateChanged(auth, (user) => {
+            if(user?.displayName){
+                getUserName(user?.displayName)
+            }
+        })
+    }
+    checkLogin()
+},[])
+
+
+
 
 const filteredRecords = records.filter((item) => {
     const fullText = Object.values(item).join(" ").toLowerCase();
@@ -85,6 +103,7 @@ function openUpdateModal(register: DataProps){
     setOpenModalUpdate(true)
 }
 
+
     return(
         <div>
             <AnimatePresence>
@@ -99,7 +118,7 @@ function openUpdateModal(register: DataProps){
                     <input type="text" placeholder="Pesquisar registros" className="border border-solid border-gray-100/20 text-gray-100 text-sm p-3.5 rounded-3xl bg-[#020817] w-100 pl-17 focus:border-green-100/40 outline-none" value={search} onChange={(e) => setSearch(e.target.value)}/>
                         <FaLocationArrow className="text-[#6F5AF5] absolute text-2xl top-3.5 left-5"/>
                     <div>
-                        <p className="text-white">Roger Anacleto</p>
+                        <p className="text-white">{userName}</p>
                     </div>
                 </section>
                 <section className="w-full bg-[#020817] h-40 flex items-center justify-between border border-solid border-gray-100/20 rounded-lg mt-13">

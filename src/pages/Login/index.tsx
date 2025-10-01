@@ -1,8 +1,8 @@
 import { Link } from "react-router"
 import { MdOutlineEmail } from "react-icons/md";
 import { TbLockPassword } from "react-icons/tb";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { useContext, useEffect, useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useContext, useState } from "react";
 import { auth } from "../../services/firebaseConnection";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -41,17 +41,6 @@ await signInWithEmailAndPassword(auth, email, password)
     )
 })
 }
-
-useEffect(() => {
-    async function checkLogin(){
-        onAuthStateChanged(auth, (user) => {
-            if(user){
-                //tem usuario logado
-            }
-        })
-    }
-    checkLogin()
-},[])
 
     return(
         <div>
