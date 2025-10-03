@@ -70,8 +70,6 @@ useEffect(() => {
 },[])
 
 
-
-
 const filteredRecords = records.filter((item) => {
     const fullText = Object.values(item).join(" ").toLowerCase();
     const normalizedSearch = search.toLowerCase();

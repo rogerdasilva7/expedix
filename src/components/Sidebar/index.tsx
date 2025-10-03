@@ -24,8 +24,8 @@ async function logoutUser(){
                 <nav className="text-white pr-5 pl-5 flex flex-col h-screen justify-between">
                     <div>
                         <div className="flex items-center justify-center mt-5">
-                            <img src={logo} alt="Expedix logo" className="h-10 w-10"/>
-                            <h1 className="text-3xl font-bold">Expedix</h1>
+                            <img src={logo} alt="Expedix logo" className="h-8 w-8"/>
+                            <h1 className="text-2xl font-bold">Expedix</h1>
                         </div>
                         <Link to={"/"} className="relative">
                             <div className="hover:text-[#6F5AF5] hover:bg-[#6f5af511] rounded-lg duration-500 ease-in-out mt-7 pt-2.5 pb-2.5 pl-2">
