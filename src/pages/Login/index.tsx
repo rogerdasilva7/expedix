@@ -24,12 +24,12 @@ await signInWithEmailAndPassword(auth, email, password)
         <p className="text-gray-100/60 text-sm">O login foi efetuado com sucesso.</p>
     </div>
     )
-    navigate("/");
     setUserLoginDetail({
         uid: value.user.uid,
         email: value.user.email,
     })
     login(userLoginDetail)
+    navigate("/")
 
 })
 .catch(() => {

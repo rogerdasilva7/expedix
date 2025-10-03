@@ -17,7 +17,6 @@ async function logoutUser(){
     logout()
     navigate("/login")
 }
-
     return(
         <div>
             <main className="h-screen w-65 bg-[#020817] flex flex-col border-solid border-r-1 border-gray-100/20">

@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 
 interface LoginProps{
     login: (data: {}) => void;
@@ -7,6 +7,7 @@ interface LoginProps{
     loginDetailAuth: {};
     getUserName: (user: string) => void;
     userName: string | null;
+    loading: boolean;
 }
 
 interface ChildrenProps{
@@ -18,18 +19,26 @@ export const AuthContext = createContext({} as LoginProps);
 const AuthProvider = ({ children }: ChildrenProps) => {
 const [userLoginAuth, setUserLoginAuth] = useState(false);
 const [loginDetailAuth, setLoginDetailAuth] = useState({});
-const [userName, setUserName] = useState<string | null>(null)
+const [userName, setUserName] = useState<string | null>(null);
+const [loading, setLoading] = useState(true);
 
+
+useEffect(() => {
+    const auth = localStorage.getItem("auth") === "true";
+    setUserLoginAuth(auth)
+    setLoading(false);
+},[])
 
 const login = (userDetails: {}) => {
+    localStorage.setItem("auth", "true");
     setUserLoginAuth(true)
     setLoginDetailAuth(userDetails)
 }
 
 const logout = () => {
+    localStorage.removeItem("auth");
     setUserLoginAuth(false)
     setLoginDetailAuth({})
-    
 }
 
 const getUserName = (user: string | null) => {
@@ -37,7 +46,7 @@ const getUserName = (user: string | null) => {
 }
 
     return(
-        <AuthContext.Provider value={{ login, logout, userLoginAuth, loginDetailAuth, userName, getUserName}}>
+        <AuthContext.Provider value={{ login, logout, userLoginAuth, loginDetailAuth, userName, getUserName, loading}}>
             {children}
         </AuthContext.Provider>
     )
