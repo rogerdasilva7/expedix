@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../services/firebaseConnection";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
+import { PiSidebarDuotone } from "react-icons/pi";
 
 export function Sidebar(){
 const { logout} = useContext(AuthContext);
@@ -22,9 +23,14 @@ async function logoutUser(){
             <main className="h-screen w-65 bg-[#020817] flex flex-col border-solid border-r-1 border-gray-100/20">
                 <nav className="text-white pr-5 pl-5 flex flex-col h-screen justify-between">
                     <div>
-                        <div className="flex items-center justify-center mt-5">
+                        <div className="flex items-center ml-3 mt-5 relative">
                             <img src={logo} alt="Expedix logo" className="h-8 w-8"/>
-                            <h1 className="text-2xl font-bold">Expedix</h1>
+                            <h1 className="text-2xl font-bold ml-2.5">Expedix</h1>
+                            <button>
+                                <div className="hover:text-[#6F5AF5] hover:bg-[#6f5af511] rounded-lg duration-500 ease-in-out cursor-pointer">
+                                    <PiSidebarDuotone className="absolute right-0.5 text-lg top-2"/>
+                                </div>
+                            </button>
                         </div>
                         <Link to={"/"} className="relative">
                             <div className="hover:text-[#6F5AF5] hover:bg-[#6f5af511] rounded-lg duration-500 ease-in-out mt-7 pt-2.5 pb-2.5 pl-2">

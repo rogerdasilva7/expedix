@@ -18,16 +18,16 @@ const [userLoginDetail, setUserLoginDetail] = useState({});
 async function loginUser(){
 await signInWithEmailAndPassword(auth, email, password)
 .then((value) => {
+    setUserLoginDetail({
+        uid: value.user.uid,
+        email: value.user.email,
+    })
     toast.success(
     <div>
         <h2 className="text-white font-bold text-sm">Login Efetuado</h2>
         <p className="text-gray-100/60 text-sm">O login foi efetuado com sucesso.</p>
     </div>
     )
-    setUserLoginDetail({
-        uid: value.user.uid,
-        email: value.user.email,
-    })
     login(userLoginDetail)
     navigate("/")
 

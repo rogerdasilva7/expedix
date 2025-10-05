@@ -1,7 +1,5 @@
 import { Outlet } from "react-router"
 import { Sidebar } from "../components/Sidebar"
-import { useContext } from "react"
-import { AuthContext } from "../contexts/AuthContext"
 export function Layout(){
 
     return(
