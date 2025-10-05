@@ -22,29 +22,35 @@ function onCloseModal(){
   onClose(true)
 }
 
-async function saveData(){
-  onClose(true)
+async function saveData(e: React.FormEvent){
+e.preventDefault();
 
-  await addDoc(collection(db, "records"),{
-    name: name,
-    telephone: telephone,
-    city: city,
-    date: date,
-    time: time, 
-    dispatcher: dispatcher,
-    observations: observations
-  })
-  .then(() => {
-    toast.success(
-    <div>
+  try{
+    await addDoc(collection(db, "records"), {
+      name, 
+      telephone,
+      city,
+      date,
+      time,
+      dispatcher,
+      observations
+    })
+      toast.success(
+      <div>
         <h2 className="text-white font-bold text-sm">Registro Criado</h2>
         <p className="text-gray-100/60 text-sm">O registro foi criado com sucesso.</p>
-    </div>
+      </div>
+    );
+
+    onClose(true);
+  } catch(error) {
+    toast.error(
+      <div>
+        <h2 className="text-white font-bold text-sm">Erro Inesperado</h2>
+        <p className="text-gray-100/60 text-sm">Houve um erro inesperado, ligue para o suporte.</p>
+      </div>
     )
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+  }
 }
 
   return (
@@ -80,7 +86,7 @@ async function saveData(){
             Preencha os campos para criar um novo registro de expedição.
           </p>
 
-          <div className="flex flex-col">
+          <form className="flex flex-col" onSubmit={saveData}>
             <div className="flex justify-between gap-4">
               <div className="flex flex-col w-full">
                 <label className="text-white pb-2">Nome</label>
@@ -89,6 +95,7 @@ async function saveData(){
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
+                  required
                 />
                 <label className="text-white pb-2">Cidade</label>
                 <input
@@ -96,6 +103,7 @@ async function saveData(){
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
+                  required
                 />
                 <label className="text-white pb-2">Hora Retirada</label>
                 <input
@@ -103,15 +111,17 @@ async function saveData(){
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex flex-col w-full">
                 <label className="text-white pb-2">Telefone</label>
                 <input
-                  type="text"
+                  type="number"
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={telephone}
                   onChange={(e) => setTelephone(e.target.value)}
+                  required
                 />
                 <label className="text-white pb-2">Data Retirada</label>
                 <input
@@ -119,6 +129,7 @@ async function saveData(){
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
+                  required
                 />
                 <label className="text-white pb-2">Expedidor</label>
                 <input
@@ -126,6 +137,7 @@ async function saveData(){
                   className="border border-gray-100/20 p-2 rounded-lg text-white mb-6.5 focus:border-green-100/40 outline-none"
                   value={dispatcher}
                   onChange={(e) => setDispatcher(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -140,10 +152,10 @@ async function saveData(){
               ></textarea>
             </div>
 
-            <button className="text-[#000] bg-[#6f5af5d7] mt-4 p-2 rounded-lg cursor-pointer hover:bg-[#6F5AF5] hover:brightness-125 duration-500" onClick={saveData}>
+            <button className="text-[#000] bg-[#6f5af5d7] mt-4 p-2 rounded-lg cursor-pointer hover:bg-[#6F5AF5] hover:brightness-125 duration-500" type="submit">
               Criar registro
             </button>
-          </div>
+          </form>
         </div>
       </motion.div>
     </>
