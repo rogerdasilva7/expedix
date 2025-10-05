@@ -101,7 +101,6 @@ function openUpdateModal(register: DataProps){
     setOpenModalUpdate(true)
 }
 
-
     return(
         <div>
             <AnimatePresence>
@@ -128,12 +127,12 @@ function openUpdateModal(register: DataProps){
                         <IoAdd className="text-4xl"/>
                     </button>
                 </section>
-                <section className="mt-5 border border-solid border-gray-100/20 w-full rounded-lg bg-[#020817]">
+                <section className="mt-5 border border-solid border-gray-100/20 w-full rounded-lg bg-[#020817] overflow-x-auto">
                     <div className="ml-7.5 mt-5 mb-5">
                         <p className="text-white text-3xl">Resumo de Expedição</p>
                         <p className="text-gray-100/60 mt-2.5">Atualmente você possui {records.length} registros na sua tabela.</p>
                     </div>
-                        <table className="w-full">
+                        <table className="w-full border-collapse min-w-max text-left">
                             <thead className="">
                                 <tr className="text-gray-100/40 text-sm">
                                     <th className="border-b border-gray-100/20 text-left pt-3.5 pb-3.5 pl-7.5">Nome</th>
@@ -149,12 +148,12 @@ function openUpdateModal(register: DataProps){
                             <tbody className="text-gray-100 w-full text-sm">
                             {filteredRecords.map((register) => (
                                 <tr className="border-b rounded-lg border-gray-100/20 text-left pt-3.5 pb-3.5 pl-7.5">
-                                    <td className="p-7.5">{register.name}</td>
-                                    <td className="p-7.5">{register.telephone}</td>
-                                    <td className="p-7.5">{register.city}</td>
-                                    <td className="p-7.5">{register.date}</td>
-                                    <td className="p-7.5">{register.time}</td>
-                                    <td className="p-7.5">{register.dispatcher}</td>
+                                    <td className="p-7.5 break-words whitespace-normal">{register.name}</td>
+                                    <td className="p-7.5 break-words whitespace-normal">{register.telephone}</td>
+                                    <td className="p-7.5 break-words whitespace-normal">{register.city}</td>
+                                    <td className="p-7.5 break-words whitespace-normal">{register.date}</td>
+                                    <td className="p-7.5 break-words whitespace-normal">{register.time}</td>
+                                    <td className="p-7.5 break-words whitespace-normal">{register.dispatcher}</td>
                                     <td className="flex gap-6 items-center p-7.5">
                                         <button className="cursor-pointer" onClick={() => openUpdateModal(register)}><RxPencil1/></button>
                                         <button className="cursor-pointer" onClick={() => deleteRecord(register.id)}><FaRegTrashAlt/></button>

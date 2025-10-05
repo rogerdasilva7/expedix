@@ -13,7 +13,7 @@ export function Sidebar(){
 const { logout} = useContext(AuthContext);
 const navigate = useNavigate();
 const [isCollapsed, setIsCollapsed] = useState(false);
-const [isHovered, setIsHovered] = useState(false);
+const [isHovered, setIsHovered] = useState(true);
 
 async function logoutUser(){
     await signOut(auth);
@@ -38,7 +38,8 @@ function sidebarCollapsed(){
                     <div>
                         <div className="flex items-center ml-2 mt-5 relative">
                             {isHovered ? <button  className="h-8" onClick={() => setIsCollapsed(false)}><div className="hover:text-[#6F5AF5] hover:bg-[#6f5af511] rounded-lg duration-500 ease-in-out cursor-pointer"><PiSidebarDuotone className="absolute right-0.5 text-2xl top-1"/></div></button> : <img src={logo} alt="Expedix logo" className="h-8 w-8"/>}
-                            {!isCollapsed && <h1 className="text-2xl font-bold ml-2.5">Expedix</h1>}
+
+                            {!isCollapsed && <div className="flex items-center justify-center"><img src={logo} alt="Expedix logo" className="h-8 w-8"/><h1 className="text-2xl font-bold ml-2.5">Expedix</h1></div>}
                             <button className="cursor-pointer" onClick={() => sidebarCollapsed()}>
                                 <div className="hover:text-[#6F5AF5] hover:bg-[#6f5af511] rounded-lg duration-500 ease-in-out cursor-pointer">
                                     {!isCollapsed && <PiSidebarDuotone className="absolute right-0.5 text-2xl top-1"/>}
