@@ -46,17 +46,34 @@ function sidebarCollapsed(){
                             </button>
                         </div>
                         <Link to={"/"} className="relative">
+                            {isHovered ? 
+                                <div className="hover:text-[#6F5AF5] rounded-lg duration-500 ease-in-out mt-7 pt-2.5 pb-2.5 pl-2">
+                                    <LuUsersRound className="absolute top-3 left-3 text-lg"/>
+                                    <p className={`font-medium pl-12 ${isCollapsed ? "hidden" : "block"}`}>Registros</p>
+                                </div>
+                                :
                             <div className="hover:text-[#6F5AF5] hover:bg-[#6f5af511] rounded-lg duration-500 ease-in-out mt-7 pt-2.5 pb-2.5 pl-2">
-                                <LuUsersRound className="absolute top-3 left-4 text-lg"/>
+                                <LuUsersRound className="absolute top-3 left-3 text-lg"/>
                                 <p className={`font-medium pl-12 ${isCollapsed ? "hidden" : "block"}`}>Registros</p>
                             </div>
+                            }
                         </Link>
                     </div>
                     <button onClick={() => logoutUser()}>
+
+                        {
+                            isCollapsed ? 
+                        <div className="flex gap-5 mb-8 hover:text-[#6F5AF5] rounded-lg duration-500 ease-in-out cursor-pointer pt-2.5 pb-2.5 pl-2 items-center">
+                            <p className="font-white text-lg"><VscSignOut /></p>
+                            {!isCollapsed && <p>Sair</p>}
+                        </div>
+                        : 
                         <div className="flex gap-5 mb-8 hover:text-[#6F5AF5] hover:bg-[#6f5af511] rounded-lg duration-500 ease-in-out cursor-pointer pt-2.5 pb-2.5 pl-2 items-center">
                             <p className="font-white text-lg"><VscSignOut /></p>
                             {!isCollapsed && <p>Sair</p>}
                         </div>
+
+                        }
                     </button>
                 </nav>
             </main>
