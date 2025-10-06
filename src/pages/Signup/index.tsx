@@ -56,7 +56,7 @@ async function newUser() {
                         <div className="flex flex-col mb-5.5 relative">
                             <label className="text-white font-bold mb-2.5">Nome de usuário</label>
                             <MdOutlineEmail className="absolute text-2xl text-gray-400 top-10.5 left-3"/>
-                            <input type="text" placeholder="nome@exemplo.com" className="text-gray-400 border-1 border-solid border-gray-100/20 rounded-md pt-2 pb-2 pl-12 focus:border-green-100/40 outline-none" value={userName} onChange={(e) => setUserName(e.target.value)}/>
+                            <input type="text" placeholder="Digite um nome de usuário" className="text-gray-400 border-1 border-solid border-gray-100/20 rounded-md pt-2 pb-2 pl-12 focus:border-green-100/40 outline-none" value={userName} onChange={(e) => setUserName(e.target.value)}/>
                         </div>
                         <div className="flex flex-col mb-5.5 relative">
                             <label className="text-white font-bold mb-2.5">Email</label>
