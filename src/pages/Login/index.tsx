@@ -46,7 +46,7 @@ await signInWithEmailAndPassword(auth, email, password)
         <div>
             <main>
                 <section className="w-screen flex flex-col items-center justify-center min-h-screen bg-[#020817]">
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center mb-5">
                         <h1 className="text-white font-bold text-3xl mb-3.5">Bem vindo a Expedix</h1>
                         <p className="text-gray-400 tracking-wide font-medium">Por favor, faça login para continuar</p>
                     </div>
