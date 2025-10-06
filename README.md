@@ -23,13 +23,14 @@ Expedix é uma aplicação web desenvolvida para a empresa **Laslife**, com o ob
 
 ## 📸 Imagens do projeto
 
-##Tela de Login
+### Tela de Login
 <img width="3432" height="1273" alt="image" src="https://github.com/user-attachments/assets/c9176c63-724d-4b8a-9c3a-cfe9cea85d80" />
 
 
-##Tela de Cadastro
+### Tela de Cadastro
 <img width="3436" height="1268" alt="image" src="https://github.com/user-attachments/assets/34ae28d8-cdee-4630-9303-e5e853f39d04" />
 
 
-##Tabela de Controle
+### Tabela de Controle
 <img width="3432" height="1266" alt="image" src="https://github.com/user-attachments/assets/2336ec58-57e9-47c6-9177-d8f29490c17d" />
+
