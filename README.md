@@ -16,7 +16,7 @@ Expedix é uma aplicação web desenvolvida para a empresa **Laslife**, com o ob
 
 ## 🛠️ Tecnologias utilizadas
 
-- React
+- ReactJS
 - TypeScript  
 - Tailwind CSS  
 - Firebase (Autenticação e Firestore)  
@@ -33,4 +33,5 @@ Expedix é uma aplicação web desenvolvida para a empresa **Laslife**, com o ob
 
 ### Tabela de Controle
 <img width="3432" height="1266" alt="image" src="https://github.com/user-attachments/assets/2336ec58-57e9-47c6-9177-d8f29490c17d" />
+
 
