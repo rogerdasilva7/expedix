@@ -1,6 +1,6 @@
 # 💼 Expedix
 
-Expedix é uma aplicação web desenvolvida para a empresa **Laslife**, com o objetivo de controlar a logística de expedição de mercadorias. A plataforma permite que os usuários registrem, editem, consultem e excluam informações sobre retiradas de produtos de forma prática e organizada.
+Expedix é uma aplicação web desenvolvida para um cliente do setor de distribuição, voltada à logística com o objetivo de controlar a expedição de mercadorias. A plataforma permite que os usuários registrem, editem, consultem e excluam informações sobre retiradas de produtos de forma prática e organizada.
 
 ## 🚀 Funcionalidades
 
@@ -33,5 +33,6 @@ Expedix é uma aplicação web desenvolvida para a empresa **Laslife**, com o ob
 
 ### Tabela de Controle
 <img width="3432" height="1266" alt="image" src="https://github.com/user-attachments/assets/2336ec58-57e9-47c6-9177-d8f29490c17d" />
+
 
 
