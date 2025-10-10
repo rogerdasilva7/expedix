@@ -41,7 +41,6 @@ await signInWithEmailAndPassword(auth, email, password)
     )
 })
 }
-
     return(
         <div>
             <main>

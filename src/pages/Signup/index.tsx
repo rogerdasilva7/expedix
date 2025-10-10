@@ -36,9 +36,19 @@ async function newUser() {
 
   } catch (error: any) {
     if (error.code === "auth/weak-password") {
-      alert("senha fraca!!")
+          toast.error(
+      <div>
+        <h2 className="text-white font-bold text-sm">Senha Fraca</h2>
+        <p className="text-gray-100/60 text-sm">Precisa ter no mínimo 6 caracteres.</p>
+      </div>
+    );
     } else if (error.code === "auth/email-already-in-use") {
-      alert("email já existe!!")
+        toast.error(
+        <div>
+          <h2 className="text-white font-bold text-sm">Email Existente</h2>
+          <p className="text-gray-100/60 text-sm">Esse email já está em uso.</p>
+        </div>
+    );
     } else {
       console.log("Erro inesperado:", error);
     }
