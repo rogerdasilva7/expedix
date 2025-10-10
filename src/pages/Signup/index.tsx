@@ -36,7 +36,7 @@ async function newUser() {
 
   } catch (error: any) {
     if (error.code === "auth/weak-password") {
-          toast.error(
+      toast.error(
       <div>
         <h2 className="text-white font-bold text-sm">Senha Fraca</h2>
         <p className="text-gray-100/60 text-sm">Precisa ter no mínimo 6 caracteres.</p>
