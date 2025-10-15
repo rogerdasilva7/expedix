@@ -50,7 +50,12 @@ async function newUser() {
         </div>
     );
     } else {
-      console.log("Erro inesperado:", error);
+        toast.error(
+        <div>
+          <h2 className="text-white font-bold text-sm">Erro</h2>
+          <p className="text-gray-100/60 text-sm">Ocorreu um erro inesperado</p>
+        </div>
+    );
     }
   }
 }
